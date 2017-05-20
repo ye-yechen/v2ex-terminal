@@ -85,7 +85,7 @@ main_ops = {
 }
 
 
-def main():
+def work():
     global offset
     global temp
     global op_stop
@@ -104,5 +104,5 @@ def main():
                 print termcolor.colored("请输入正确的序号", "red")
 
 
-if __name__ == '__main__':
-    main()
+# if __name__ == '__main__':
+#     work()

@@ -14,6 +14,7 @@ session = requests.session()
 login_url = 'https://v2ex.com/signin'
 home_page_url = 'https://www.v2ex.com'
 mission_url = 'https://www.v2ex.com/mission/daily'
+base_topic_url = 'https://www.v2ex.com/t/'
 
 
 def format_time(seconds):
@@ -22,5 +23,10 @@ def format_time(seconds):
 
 
 def clear():
-    i = os.system("cls") # windows linux->clear
+    i = os.system("cls")  # windows linux->clear
 
+# 显示用户的主题：/api/topics/show.json?username=xiqingongzi
+# 回复：https://www.v2ex.com/api/replies/show.json?topic_id=362535
+# 某个节点的主题：/api/topics/show.json?node_name=v2ex
+# 查看具体的Node信息：/api/nodes/show.json?name=YourNodeName
+# 某个用户的信息：/api/members/show.json?username=Livid

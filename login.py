@@ -124,20 +124,21 @@ def mission():
         # print termcolor.colored('领取金币失败！', 'red')
 
 
-if __name__ == '__main__':
-    flag, username = is_login()
-    if flag:
-        Logging.debug(u"你已经登录过咯")
-    else:
-        resp = login()
-        if resp.status_code == 200:
-            Logging.success(u'登录成功，正在领取金币...')
-            page = session.get(mission_url, headers=headers).content
-            soup = BS(page, "html.parser")
-            is_attain = soup.find('li', attrs={'class': 'fa fa-ok-sign'})
-            if is_attain:
-                Logging.success(u'今日金币已领取！')
-            else:
-                mission()
-        else:
-            Logging.error(u'登录失败！')
+# if __name__ == '__main__':
+#     flag, username = is_login()
+#     if flag:
+#         Logging.debug(u"你已经登录过咯")
+#     else:
+#         resp = login()
+#         if resp.status_code == 200:
+#             Logging.success(u'登录成功，正在领取金币...')
+#             session.cookies.save(ignore_discard=True)
+#             page = session.get(mission_url, headers=headers).content
+#             soup = BS(page, "html.parser")
+#             is_attain = soup.find('li', attrs={'class': 'fa fa-ok-sign'})
+#             if is_attain:
+#                 Logging.success(u'今日金币已领取！')
+#             else:
+#                 mission()
+#         else:
+#             Logging.error(u'登录失败！')
