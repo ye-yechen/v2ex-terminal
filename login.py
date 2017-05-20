@@ -1,17 +1,10 @@
 # -*- coding:utf-8 -*-
 import requests
-import cookielib
 import termcolor
 import sys
 import re
+from conf import session, headers, login_url, home_page_url, mission_url
 from bs4 import BeautifulSoup as BS
-
-session = requests.session()
-session.cookies = cookielib.LWPCookieJar('cookies')
-try:
-    session.cookies.load(ignore_discard=True)
-except:
-    pass
 
 
 class Logging:
@@ -63,19 +56,8 @@ class NetworkError(Exception):
             self.message = message
         Logging.error(self.message)
 
-
-headers = {
-        "Host": "www.v2ex.com",
-        "Referer": "https://www.v2ex.com/signin",
-        "Origin": "https://www.v2ex.com",
-        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/57.0.2987.133 Safari/537.36'
-    }
-
 username = ''   # your v2ex username
 password = ''    # your v2ex password
-login_url = 'https://v2ex.com/signin'
-home_page_url = 'https://www.v2ex.com'
-mission_url = 'https://www.v2ex.com/mission/daily'
 
 
 # 获取登录参数
@@ -141,6 +123,7 @@ def mission():
         Logging.error(u'领取金币失败！')
         # print termcolor.colored('领取金币失败！', 'red')
 
+
 if __name__ == '__main__':
     flag, username = is_login()
     if flag:
@@ -148,16 +131,13 @@ if __name__ == '__main__':
     else:
         resp = login()
         if resp.status_code == 200:
-            # print termcolor.colored('登录成功，领取金币...', 'green')
             Logging.success(u'登录成功，正在领取金币...')
             page = session.get(mission_url, headers=headers).content
             soup = BS(page, "html.parser")
             is_attain = soup.find('li', attrs={'class': 'fa fa-ok-sign'})
             if is_attain:
                 Logging.success(u'今日金币已领取！')
-                # print termcolor.colored('今日金币已领取！', 'green')
             else:
                 mission()
         else:
             Logging.error(u'登录失败！')
-            # print termcolor.colored('登录失败！', 'red')
