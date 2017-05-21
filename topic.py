@@ -39,7 +39,7 @@ class Topic:
             answer.author = data.get('member').get('username')
             answer.time = format_time(data.get('created'))
             answer_list.append(answer)
-        return answer_list
+        return answer_list, topic.replies
 
     def collect(self, topic):
         url = base_topic_url + str(topic.id)
@@ -82,8 +82,8 @@ class Topic:
             op = raw_input("Topic$ ")
             if op == "answer":
                 answer = Answer()
-                answer_list = self.answer(topic)
-                answer.operate(answer_list)
+                answer_list, replies = self.answer(topic)
+                answer.operate(answer_list, replies)
             elif op == "author":
                 pass
             elif op == "collect":

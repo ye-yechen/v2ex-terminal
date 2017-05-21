@@ -58,6 +58,7 @@ def latest():
         topic.node_title = data.get('node').get('title')
         topic.node_url = data.get('node').get('url')
         topic.time = format_time(data.get('created'))
+        topic.replies = data.get('replies')
         topics.append(topic)
         id = termcolor.colored(str(index), 'red')
         time = termcolor.colored(topic.time, 'white')

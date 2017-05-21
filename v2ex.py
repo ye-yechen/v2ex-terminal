@@ -35,6 +35,13 @@ def main():
             else:
                 Logging.error(u'登录失败！')
     else:
+        page = session.get(mission_url, headers=headers).content
+        soup = BS(page, "html.parser")
+        is_attain = soup.find('li', attrs={'class': 'fa fa-ok-sign'})
+        if is_attain:
+            Logging.success(u'今日金币已领取！')
+        else:
+            mission()
         work()
 
 
