@@ -58,11 +58,11 @@ class Topic:
         collect_url_a = div.contents[1]
         tmp_url = collect_url_a['href']
         collect_url = home_page_url + tmp_url
-        # 获取 once 值
-        global once
-        once = soup.find('input', attrs={"name": "once"}).get("value")
-        # once 加入全局变量
-        globlevalue.once = once
+        # # 获取 once 值
+        # global once
+        # once = soup.find('input', attrs={"name": "once"}).get("value")
+        # # once 加入全局变量
+        # globlevalue.once = once
         resp = session.get(collect_url, headers=headers)
         if resp.status_code == 200:
             print termcolor.colored("收藏话题成功.", "green")
@@ -102,7 +102,7 @@ class Topic:
                "**  ignore:     忽略话题\n" \
                "**  thx:        感谢话题作者\n" \
                "**  clear:      清屏\n" \
-               "**  break:      返回上级操作目录\n" \
+               "**  back:       返回上级操作目录\n" \
                "**\n" \
                "************************************************************************\n"
         print termcolor.colored(info, "green")
@@ -127,7 +127,7 @@ class Topic:
                 self.collect(topic)
             elif op == "help":
                 self.help()
-            elif op == "break":
+            elif op == "back":
                 break
             elif op == "clear":
                 clear()

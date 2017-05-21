@@ -9,6 +9,7 @@ limit = 5
 temp_page = 1
 total_page = 0
 replies = 0
+current_answer_list = []
 
 
 class Answer:
@@ -29,19 +30,17 @@ class Answer:
         info = "\n" \
                "*************************************************************************\n" \
                "**\n" \
-               "**  Num:        查看答案(Num 为当前页的id)\n" \
                "**  next:       下一页\n" \
                "**  pre:        上一页\n" \
-               "**  hide:       隐藏答案\n" \
-               "**  thx:        感谢答案作者\n" \
                "**  clear:      清屏\n" \
-               "**  break:      返回上级操作目录\n" \
+               "**  back:       返回上级操作目录\n" \
                "**\n" \
                "************************************************************************\n"
         print termcolor.colored(info, "green")
 
     def show_answers(self, answer_list, cur_page=1):
         global offset, limit, temp_offset, total_page, temp_page
+        global current_answer_list
         # 当前 answer，用于分页显示答案
         current_answer_list = answer_list[offset:offset+limit]
         index = 0
@@ -60,9 +59,10 @@ class Answer:
             for answer in current_answer_list:
                 id = termcolor.colored(str(index), 'red')
                 time = termcolor.colored(answer.time, 'white')
+                thanks = termcolor.colored(str(answer.thanks)+u" 人感谢.", 'cyan')
                 content = termcolor.colored(answer.content, 'blue') + \
                         termcolor.colored("(" + answer.author + ")", 'green')
-                info = '\n'.join([id + '\t\t' + time, content]) + '\n'
+                info = '\n'.join([id + '\t\t' + time + '\t\t' + thanks, content]) + '\n'
                 index += 1
                 print info
         else:
@@ -100,13 +100,9 @@ class Answer:
                     self.next_page(answer_list)
                 elif op == "prev":
                     self.prev_page(answer_list)
-                elif op == "hide":
-                    print termcolor.colored("暂不支持!", "red")
-                elif op == "thx":
-                    print termcolor.colored("暂不支持!", "red")
                 elif op == "help":
                     self.help()
-                elif op == "break":
+                elif op == "back":
                     break
                 elif op == "clear":
                     clear()
