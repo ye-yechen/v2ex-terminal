@@ -1,11 +1,19 @@
 # -*- coding:utf-8 -*-
 from conf import session, headers, base_topic_url
 import termcolor
-from conf import clear, format_time
-from selenium import webdriver
+from conf import clear, format_time, home_page_url
 import json
 from bs4 import BeautifulSoup as BS
 from answer import Answer
+from user import User
+import globlevalue
+
+try:
+    session.cookies.load(ignore_discard=True)
+except:
+    pass
+
+once = ""
 
 
 class Topic:
@@ -42,18 +50,43 @@ class Topic:
         return answer_list, topic.replies
 
     def collect(self, topic):
-        url = base_topic_url + str(topic.id)
-        driver = webdriver.PhantomJS("D:/phantomjs-2.1.1-windows/bin/phantomjs.exe")
-        driver.get(url)
-        resp = driver.page_source
-        print resp
-        soup = BS(resp, 'html.parser')
+        topic_url = base_topic_url + str(topic.id)
+        resp = session.get(topic_url, headers=headers)
+        soup = BS(resp.content, 'html.parser')
         div = soup.find('div', class_="topic_buttons")
-        print div
-        result = div.contents[1]
-        print result
+        # 获取 “收藏” 的url
+        collect_url_a = div.contents[1]
+        tmp_url = collect_url_a['href']
+        collect_url = home_page_url + tmp_url
+        # 获取 once 值
+        global once
+        once = soup.find('input', attrs={"name": "once"}).get("value")
+        # once 加入全局变量
+        globlevalue.once = once
+        resp = session.get(collect_url, headers=headers)
+        if resp.status_code == 200:
+            print termcolor.colored("收藏话题成功.", "green")
+        else:
+            print termcolor.colored("收藏话题失败.", "red")
+
+    def author_info(self, topic):
+        author_url = home_page_url+"/api/members/show.json?username="+topic.author
+        response = session.get(author_url)
+        data = json.loads(response.content)
+        user = User()
+        user.id = data.get('id')
+        user.name = data.get('username')
+        user.website = data.get('website')
+        user.twitter = data.get('twitter')
+        user.github = data.get('github')
+        user.location = data.get('location')
+        user.tagline = data.get('tagline')
+        user.bio = data.get('bio')
+        user.time = format_time(data.get('created'))
+        return user
 
     def ignore(self, topic):
+        # ignore_url = home_page_url + "/ignore/topic/"+str(topic.id)+"/?once="+once
         pass
 
     def thanks(self, topic):
@@ -68,7 +101,6 @@ class Topic:
                "**  collect:    收藏话题\n" \
                "**  ignore:     忽略话题\n" \
                "**  thx:        感谢话题作者\n" \
-               "**  pwd:        查看当前条目内容\n" \
                "**  clear:      清屏\n" \
                "**  break:      返回上级操作目录\n" \
                "**\n" \
@@ -85,17 +117,20 @@ class Topic:
                 answer_list, replies = self.answer(topic)
                 answer.operate(answer_list, replies)
             elif op == "author":
-                pass
+                user = self.author_info(topic)
+                user.operate(user)
+            elif op == "thx":
+                print termcolor.colored("暂不支持!", "red")
+            elif op == "ignore":
+                print termcolor.colored("暂不支持!", "red")
             elif op == "collect":
-                pass
+                self.collect(topic)
             elif op == "help":
                 self.help()
             elif op == "break":
                 break
             elif op == "clear":
                 clear()
-            elif op == "quit":
-                return True
             else:
                 self.error()
 

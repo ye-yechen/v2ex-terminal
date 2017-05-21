@@ -1,4 +1,0 @@
-#LWP-Cookies-2.0
-Set-Cookie3: A2="\"2|1:0|10:1495295103|2:A2|56:ZjFlNTAzNTdkMmEyNWI2YTliZTNiZjBjMTdjMDAzZmM2NmM2OTlkNA==|e3d0179653744a1cb6d4568eca62a622b5f7a662357f9a3f32a87ca908090ae2\""; path="/"; domain=".v2ex.com"; path_spec; domain_dot; expires="2018-05-20 15:45:03Z"; httponly=None; version=0
-Set-Cookie3: PB3_SESSION="\"2|1:0|10:1495295092|11:PB3_SESSION|36:djJleDoxMTIuMjYuNzcuMjAyOjY4NjAyMjg1|29c5fb3f662927b05c0f29242fb9949a5a5cd87036124dd4f916513090edfd27\""; path="/"; domain="www.v2ex.com"; path_spec; expires="2017-05-25 15:44:52Z"; httponly=None; version=0
-Set-Cookie3: V2EX_TAB="\"2|1:0|10:1495295103|8:V2EX_TAB|8:dGVjaA==|710a65f3ac292b9154cb348aec16f59f22f1060e4fbbb47e545a4c0efc18211b\""; path="/"; domain="www.v2ex.com"; path_spec; expires="2017-06-03 15:45:03Z"; httponly=None; version=0

@@ -1,12 +1,11 @@
 # -*- coding:utf-8 -*-
 from login import login, is_login, Logging, mission
-from conf import session, mission_url, headers
+from conf import session, mission_url, headers, format_time
 from bs4 import BeautifulSoup as BS
 import os
-import cookielib
 from operate import work
+import globlevalue
 
-session.cookies = cookielib.LWPCookieJar('cookies')
 try:
     session.cookies.load(ignore_discard=True)
 except:
@@ -16,6 +15,7 @@ except:
 def main():
     if not os.path.exists("cookies"):
         flag, username = is_login()
+        globlevalue.username = username
         if flag:
             Logging.debug(u"你已经登录过咯")
         else:
@@ -35,6 +35,9 @@ def main():
             else:
                 Logging.error(u'登录失败！')
     else:
+        flag, username = is_login()
+        # 用户名放入全局变量
+        globlevalue.username = username
         page = session.get(mission_url, headers=headers).content
         soup = BS(page, "html.parser")
         is_attain = soup.find('li', attrs={'class': 'fa fa-ok-sign'})

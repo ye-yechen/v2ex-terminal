@@ -34,7 +34,6 @@ class Answer:
                "**  pre:        上一页\n" \
                "**  hide:       隐藏答案\n" \
                "**  thx:        感谢答案作者\n" \
-               "**  pwd:        查看当前条目内容\n" \
                "**  clear:      清屏\n" \
                "**  break:      返回上级操作目录\n" \
                "**\n" \
@@ -101,14 +100,16 @@ class Answer:
                     self.next_page(answer_list)
                 elif op == "prev":
                     self.prev_page(answer_list)
+                elif op == "hide":
+                    print termcolor.colored("暂不支持!", "red")
+                elif op == "thx":
+                    print termcolor.colored("暂不支持!", "red")
                 elif op == "help":
                     self.help()
                 elif op == "break":
                     break
                 elif op == "clear":
                     clear()
-                elif op == "quit":
-                    return True
                 else:
                     self.error()
 

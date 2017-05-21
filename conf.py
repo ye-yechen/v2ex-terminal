@@ -1,7 +1,7 @@
 # -*- coding:utf-8 -*-
 import requests
 import time
-import termcolor
+import cookielib
 import os
 
 headers = {
@@ -11,6 +11,7 @@ headers = {
         'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/57.0.2987.133 Safari/537.36'
     }
 session = requests.session()
+session.cookies = cookielib.LWPCookieJar('cookies')
 login_url = 'https://v2ex.com/signin'
 home_page_url = 'https://www.v2ex.com'
 mission_url = 'https://www.v2ex.com/mission/daily'

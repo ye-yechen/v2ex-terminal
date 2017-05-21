@@ -1,5 +1,4 @@
 # -*- coding:utf-8 -*-
-import requests
 import termcolor
 import sys
 import re
