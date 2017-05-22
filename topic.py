@@ -65,9 +65,9 @@ class Topic:
         # globlevalue.once = once
         resp = session.get(collect_url, headers=headers)
         if resp.status_code == 200:
-            print termcolor.colored("收藏话题成功.", "green")
+            print termcolor.colored(u"收藏话题成功.", "green")
         else:
-            print termcolor.colored("收藏话题失败.", "red")
+            print termcolor.colored(u"收藏话题失败.", "red")
 
     def author_info(self, topic):
         author_url = home_page_url+"/api/members/show.json?username="+topic.author
@@ -96,13 +96,13 @@ class Topic:
         info = "\n" \
                "*************************************************************************\n" \
                "**\n" \
-               "**  answer:     查看回答\n" \
-               "**  author:     查看话题的作者\n" \
-               "**  collect:    收藏话题\n" \
-               "**  ignore:     忽略话题\n" \
-               "**  thx:        感谢话题作者\n" \
-               "**  clear:      清屏\n" \
-               "**  back:       返回上级操作目录\n" \
+               u"**  answer:     查看回答\n" \
+               u"**  author:     查看话题的作者\n" \
+               u"**  collect:    收藏话题\n" \
+               u"**  ignore:     忽略话题\n" \
+               u"**  thx:        感谢话题作者\n" \
+               u"**  clear:      清屏\n" \
+               u"**  back:       返回上级操作目录\n" \
                "**\n" \
                "************************************************************************\n"
         print termcolor.colored(info, "green")
@@ -120,9 +120,9 @@ class Topic:
                 user = self.author_info(topic)
                 user.operate(user)
             elif op == "thx":
-                print termcolor.colored("暂不支持!", "red")
+                print termcolor.colored(u"暂不支持!", "red")
             elif op == "ignore":
-                print termcolor.colored("暂不支持!", "red")
+                print termcolor.colored(u"暂不支持!", "red")
             elif op == "collect":
                 self.collect(topic)
             elif op == "help":

@@ -81,7 +81,7 @@ def is_login():
     try:
         index = session.get(home_page_url, headers=headers).content
     except:
-        print termcolor.colored("网络故障,请检查您的网络设置", "yellow")
+        print termcolor.colored(u"网络故障,请检查您的网络设置", "yellow")
         sys.exit()
     soup = BS(index, 'html.parser')
     login_flag = soup.find('a', href='https://workspace.v2ex.com/')
@@ -90,15 +90,15 @@ def is_login():
         user = re.findall(r'<a href="/member/.*?">(.*?)</a>', index)[0]
         return True, user
     else:
-        print termcolor.colored("请您登录...", "magenta")
+        print termcolor.colored(u"请您登录...", "magenta")
         return False, None
 
 
 def login():
     # print u'输入用户名'.decode('utf-8').encode('gbk')
     global username, password
-    username = raw_input(termcolor.colored('输入用户名: ', 'cyan'))
-    password = raw_input(termcolor.colored('输入密码: ', 'cyan'))
+    username = raw_input(termcolor.colored(u'输入用户名: ', 'cyan'))
+    password = raw_input(termcolor.colored(u'输入密码: ', 'cyan'))
     data = get_login_data()
     resp = session.post(login_url, data=data, headers=headers)
     return resp

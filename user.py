@@ -22,11 +22,11 @@ class User:
         info = "\n" \
                "*************************************************************************\n" \
                "**\n" \
-               "**  focus:      关注用户\n" \
-               "**  block:      屏蔽用户\n" \
-               "**  topics:     查看用户的主题\n" \
-               "**  clear:      清屏\n" \
-               "**  back:      返回上级操作目录\n" \
+               u"**  focus:      关注用户\n" \
+               u"**  block:      屏蔽用户\n" \
+               u"**  topics:     查看用户的主题\n" \
+               u"**  clear:      清屏\n" \
+               u"**  back:      返回上级操作目录\n" \
                "**\n" \
                "************************************************************************\n"
         print termcolor.colored(info, "green")
@@ -48,18 +48,18 @@ class User:
         focus_url = home_page_url+"/follow/" + str(author.id) + "?once="+str(globlevalue.once)
         response = session.get(focus_url, headers=headers)
         if response.status_code == 200:
-            print termcolor.colored("已关注 {name}.".format(name=author.name), "green")
+            print termcolor.colored(u"已关注 {name}.".format(name=author.name), "green")
         else:
-            print termcolor.colored("关注失败.", "red")
+            print termcolor.colored(u"关注失败.", "red")
 
     def block(self, author):
         # 这个 t 参数是当前登录用户注册的时间浮点数
         block_url = home_page_url+"/block/" + str(author.id) + "?t="+str(globlevalue.time)
         response = session.get(block_url, headers=headers)
         if response.status_code == 200:
-            print termcolor.colored("已屏蔽 {name}.".format(name=author.name), "green")
+            print termcolor.colored(u"已屏蔽 {name}.".format(name=author.name), "green")
         else:
-            print termcolor.colored("屏蔽失败.", "red")
+            print termcolor.colored(u"屏蔽失败.", "red")
 
     # def topics(self, author):
     #     url = home_page_url+"/api/topics/show.json?username="+author.name

@@ -20,13 +20,13 @@ def bye():
     global op_stop
     op_stop = True
     print termcolor.colored("Bye", "cyan")
-    print termcolor.colored("有任何建议欢迎与我联系: yczll678@163.com", "cyan")
+    print termcolor.colored(u"有任何建议欢迎与我联系: yczll678@163.com", "cyan")
 
 
 def exit():
     global op_stop
     op_stop = True
-    print termcolor.colored("因网络故障程序退出,请检查您的网络设置", "yellow")
+    print termcolor.colored(u"因网络故障程序退出,请检查您的网络设置", "yellow")
 
 
 def get_topics(url):
@@ -150,18 +150,18 @@ def error():
 
 
 def help():
-    info = "\n" \
+    info = u"\n" \
            "**********************************************************\n" \
-           "**\n" \
-           "**  latest:  最新话题\n" \
-           "**  hot:     最热话题\n" \
-           "**  #id:    指定id的话题\n" \
-           "**  me:      个人信息\n" \
-           "**  Num:     选中具体TL条目进行操作(Num 为话题的id)\n" \
-           "**  help:    帮助\n" \
-           "**  clear:   清屏\n" \
-           "**  quit:    退出系统\n" \
-           "**\n" \
+           u"**\n" \
+           u"**  latest:  最新话题\n" \
+           u"**  hot:     最热话题\n" \
+           u"**  #id:    指定id的话题\n" \
+           u"**  me:      个人信息\n" \
+           u"**  Num:     选中具体TL条目进行操作(Num 为话题的id)\n" \
+           u"**  help:    帮助\n" \
+           u"**  clear:   清屏\n" \
+           u"**  quit:    退出系统\n" \
+           u"**\n" \
            "**********************************************************\n"
     print termcolor.colored(info, "green")
 
@@ -196,7 +196,7 @@ def work():
                 topic = result_topics[opn]
                 topic.operate(topic)
             else:
-                print termcolor.colored("请输入正确的序号", "red")
+                print termcolor.colored(u"请输入正确的序号", "red")
         elif re.match(mode2, op.strip()):
             opn = int(op[1:])
             print opn

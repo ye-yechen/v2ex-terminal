@@ -29,11 +29,11 @@ class Answer:
     def help(self):
         info = "\n" \
                "*************************************************************************\n" \
-               "**\n" \
-               "**  next:       下一页\n" \
-               "**  pre:        上一页\n" \
-               "**  clear:      清屏\n" \
-               "**  back:       返回上级操作目录\n" \
+               u"**\n" \
+               u"**  next:       下一页\n" \
+               u"**  pre:        上一页\n" \
+               u"**  clear:      清屏\n" \
+               u"**  back:       返回上级操作目录\n" \
                "**\n" \
                "************************************************************************\n"
         print termcolor.colored(info, "green")
@@ -48,13 +48,13 @@ class Answer:
         temp_page = cur_page
         total_page = len(answer_list)/limit if len(answer_list) % limit == 0 else len(answer_list)/limit+1
         total_page = 1 if total_page == 0 else total_page
-        print termcolor.colored("答案共有 ", "yellow")+ \
-              termcolor.colored("{total_page}".format(total_page=str(total_page)), "red") + \
-              termcolor.colored(" 页.当前第 ","yellow") + \
+        print termcolor.colored(u"答案共有 ", "yellow")+ \
+              termcolor.colored(u"{total_page}".format(total_page=str(total_page)), "red") + \
+              termcolor.colored(u" 页.当前第 ","yellow") + \
               termcolor.colored("{cur_page}".format(cur_page=str(cur_page)),"red") + \
-              termcolor.colored(" 页.共有 ", 'yellow') + \
+              termcolor.colored(u" 页.共有 ", 'yellow') + \
               termcolor.colored("{replies}".format(replies=replies), "red") + \
-              termcolor.colored(" 条回答.", "yellow")
+              termcolor.colored(u" 条回答.", "yellow")
         if len(current_answer_list) > 0:
             for answer in current_answer_list:
                 id = termcolor.colored(str(index), 'red')
@@ -66,7 +66,7 @@ class Answer:
                 index += 1
                 print info
         else:
-            print termcolor.colored("还没有回答.", 'red')
+            print termcolor.colored(u"还没有回答.", 'red')
 
     def next_page(self, answer_list):
         global offset, limit, temp_offset, temp_page, total_page
@@ -75,7 +75,7 @@ class Answer:
             offset = temp_offset + limit
             self.show_answers(answer_list, cur_page)
         else:
-            print termcolor.colored("已是最后一页.", "red")
+            print termcolor.colored(u"已是最后一页.", "red")
 
     def prev_page(self, answer_list):
         global offset, limit, temp_offset, temp_page, total_page
@@ -84,7 +84,7 @@ class Answer:
             offset = temp_offset - limit
             self.show_answers(answer_list, cur_page)
         else:
-            print termcolor.colored("已是第一页.", "red")
+            print termcolor.colored(u"已是第一页.", "red")
 
     def operate(self, answer_list, reply):
         global replies
