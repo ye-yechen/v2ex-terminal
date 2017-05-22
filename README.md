@@ -52,4 +52,9 @@ pip install -r requirements.txt
 
 ![作者](https://github.com/creatorYC/v2ex-terminal/blob/master/images/author.PNG)
 
+---------------
+### - contact me
+- email: <yechoor@gmail.com>
+
+
 
