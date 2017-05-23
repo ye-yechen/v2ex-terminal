@@ -3,6 +3,8 @@ import requests
 import time
 import cookielib
 import os
+import platform
+import re
 
 headers = {
         "Host": "www.v2ex.com",
@@ -18,13 +20,27 @@ mission_url = 'https://www.v2ex.com/mission/daily'
 base_topic_url = 'https://www.v2ex.com/t/'
 
 
+# 将时间秒数格式化
 def format_time(seconds):
     local_time = time.localtime(seconds)
     return time.strftime("%Y-%m-%d %H:%M:%S", local_time)
 
 
+# 调用系统的清屏命令
 def clear():
-    i = os.system("cls")  # windows linux->clear
+    if platform.system() == "Windows":
+        i = os.system("cls")
+    else:
+        i = os.system("clear")
+
+
+# 过滤表情
+def filter_emoji(input_str, replace_str=''):
+    try:
+        co = re.compile(u'[\U00010000-\U0010ffff]')
+    except re.error:
+        co = re.compile(u'[\uD800-\uDBFF][\uDC00-\uDFFF]')
+    return co.sub(replace_str, input_str)
 
 # 显示用户的主题：/api/topics/show.json?username=xiqingongzi
 # 回复：https://www.v2ex.com/api/replies/show.json?topic_id=362535

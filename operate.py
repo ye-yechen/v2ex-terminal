@@ -2,10 +2,9 @@
 import requests
 from topic import Topic
 import json
-import os
 import re
 from login import login, is_login
-from conf import clear, session, headers, format_time, home_page_url
+from conf import clear, session, filter_emoji, format_time, home_page_url
 import termcolor
 import globlevalue
 
@@ -37,9 +36,9 @@ def get_topics(url):
     for data in json_data:
         topic = Topic()
         topic.id = data.get('id')
-        topic.title = data.get('title')
+        topic.title = filter_emoji(data.get('title'))
         topic.url = data.get('url')
-        topic.content = data.get('content')
+        topic.content = filter_emoji(data.get('content'))
         topic.author = data.get('member').get('username')
         topic.node_title = data.get('node').get('title')
         topic.node_url = data.get('node').get('url')
@@ -101,7 +100,7 @@ def get_my_time():
     response = session.get(url)
     data = json.loads(response.content)
     time = data.get('created')
-    globlevalue.time = time
+    globlevalue.time = time     # 放入全局变量，这个参数在屏蔽用户时有验证
 
 
 def about():
@@ -129,9 +128,9 @@ def get_topic_by_id(topic_id):
     data = json.loads(resp.content)[0]
     topic = Topic()
     topic.id = data.get('id')
-    topic.title = data.get('title')
+    topic.title = filter_emoji(data.get('title'))
     topic.url = data.get('url')
-    topic.content = data.get('content')
+    topic.content = filter_emoji(data.get('content'))
     topic.author = data.get('member').get('username')
     topic.node_title = data.get('node').get('title')
     topic.node_url = data.get('node').get('url')

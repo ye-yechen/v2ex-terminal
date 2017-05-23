@@ -10,7 +10,7 @@
 - **克隆本项目**
 
 ```
- git clone git@github.com:creatorYC/v2ex-terminal.git
+ git clone https://github.com/creatorYC/v2ex-terminal.git
  cd v2ex-terminal
 ```
 

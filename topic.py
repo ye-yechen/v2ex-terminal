@@ -1,7 +1,7 @@
 # -*- coding:utf-8 -*-
 from conf import session, headers, base_topic_url
 import termcolor
-from conf import clear, format_time, home_page_url
+from conf import clear, format_time, home_page_url, filter_emoji
 import json
 from bs4 import BeautifulSoup as BS
 from answer import Answer
@@ -43,7 +43,7 @@ class Topic:
             answer = Answer()
             answer.id = data.get('id')
             answer.thanks = data.get('thanks')
-            answer.content = data.get('content')
+            answer.content = filter_emoji(data.get('content'))
             answer.author = data.get('member').get('username')
             answer.time = format_time(data.get('created'))
             answer_list.append(answer)
