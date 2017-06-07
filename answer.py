@@ -31,7 +31,7 @@ class Answer:
                "*************************************************************************\n" \
                u"**\n" \
                u"**  next:       下一页\n" \
-               u"**  pre:        上一页\n" \
+               u"**  prev:       上一页\n" \
                u"**  clear:      清屏\n" \
                u"**  back:       返回上级操作目录\n" \
                "**\n" \
@@ -49,19 +49,19 @@ class Answer:
         total_page = len(answer_list)/limit if len(answer_list) % limit == 0 else len(answer_list)/limit+1
         total_page = 1 if total_page == 0 else total_page
         print termcolor.colored(u"答案共有 ", "yellow")+ \
-              termcolor.colored(u"{total_page}".format(total_page=str(total_page)), "red") + \
-              termcolor.colored(u" 页.当前第 ","yellow") + \
-              termcolor.colored("{cur_page}".format(cur_page=str(cur_page)),"red") + \
-              termcolor.colored(u" 页.共有 ", 'yellow') + \
-              termcolor.colored("{replies}".format(replies=replies), "red") + \
-              termcolor.colored(u" 条回答.", "yellow")
+            termcolor.colored(u"{total_page}".format(total_page=str(total_page)), "red") + \
+            termcolor.colored(u" 页.当前第 ", "yellow") + \
+            termcolor.colored("{cur_page}".format(cur_page=str(cur_page)), "red") + \
+            termcolor.colored(u" 页.共有 ", 'yellow') + \
+            termcolor.colored("{replies}".format(replies=replies), "red") + \
+            termcolor.colored(u" 条回答.", "yellow")
         if len(current_answer_list) > 0:
             for answer in current_answer_list:
                 id = termcolor.colored(str(index), 'red')
                 time = termcolor.colored(answer.time, 'white')
                 thanks = termcolor.colored(str(answer.thanks)+u" 人感谢.", 'cyan')
                 content = termcolor.colored(answer.content, 'blue') + \
-                        termcolor.colored("(" + answer.author + ")", 'green')
+                    termcolor.colored("(" + answer.author + ")", 'green')
                 info = '\n'.join([id + '\t\t' + time + '\t\t' + thanks, content]) + '\n'
                 index += 1
                 print info

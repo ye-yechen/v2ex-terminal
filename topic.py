@@ -6,7 +6,6 @@ import json
 from bs4 import BeautifulSoup as BS
 from answer import Answer
 from user import User
-import globlevalue
 
 try:
     session.cookies.load(ignore_discard=True)
@@ -25,7 +24,7 @@ class Topic:
         id = termcolor.colored(topic.id, 'red')
         time = termcolor.colored(topic.time, 'white')
         title = termcolor.colored(topic.title, 'blue') + \
-                termcolor.colored("(" + topic.author + ")", 'green')
+            termcolor.colored("(" + topic.author + ")", 'green')
         content = termcolor.colored(topic.content, 'magenta')
         tag = termcolor.colored(u"节点: " + topic.node_title, 'cyan')
         info = '\n'.join([id + '\t\t' + time, title, content, tag]) + '\n'
